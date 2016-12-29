@@ -247,10 +247,10 @@ class App extends Component {
         if (this.props.questionAnswers[questionNo-1].depends!=undefined){
 
             var dependentAnswer=this.getAnswerToQuestionNo(this.props.questionAnswers[questionNo-1].depends);
-            return this.props.questionAnswers[questionNo-1].options[dependentAnswer][answer];
+            return this.props.questionAnswers[questionNo-1].options[dependentAnswer-1][answer];
         }else{
             
-            return this.props.questionAnswers[questionNo-1].options[answer];
+            return this.props.questionAnswers[questionNo-1].options[answer-1];
         }
 
     }
