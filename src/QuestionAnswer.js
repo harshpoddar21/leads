@@ -12,8 +12,8 @@ class QuestionAnswer extends Component{
 
         return (
             <div>
-         <div className="question">{this.props.questionAnswer.question}</div>
-         <Options dataF={this.props.questionAnswer.options} answerSelected={this.props.answerSelected} optionSelected={this.props.optionSelected}/>
+         <div className="question">{this.props.question}</div>
+         <Options dataF={this.props.options} answerSelected={this.props.answerSelected} optionSelected={this.props.optionSelected}/>
             </div>
     )
     }

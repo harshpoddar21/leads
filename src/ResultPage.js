@@ -14,13 +14,23 @@ class ResultPage extends Component{
 
 
         var followUpActions=null;
-        if (this.props.isInterested==1 && !this.props.phoneNumber){
+        if (this.props.isInterested==1 ){
             
-            followUpActions=<PhoneNumberAcceptor description="Great please give us your contact details to start Shuttling!!" /> ;
+            followUpActions=<PhoneNumberAcceptor
+                onPhoneNumberChanged={this.props.onPhoneNumberChanged}
+                phoneNumber={this.props.phoneNumber} 
+                description="Great please give us your contact details to start Shuttling!!"
+                onPhoneNumberSubmitted={this.props.onPhoneNumberSubmitted}
+            /> ;
                 
-        }else if (this.props.isInterested==2 && !this.props.phoneNumber){
+        }else if (this.props.isInterested==2){
 
-           followUpActions= <PhoneNumberAcceptor description="Oh!! Kindly provide us your contact details and we will get in touch with you shortly." />
+           followUpActions= <PhoneNumberAcceptor 
+               onPhoneNumberChanged={this.props.onPhoneNumberChanged} 
+               phoneNumber={this.props.phoneNumber} 
+               description="Oh!! Kindly provide us your contact details and we will get in touch with you shortly." 
+               onPhoneNumberSubmitted={this.props.onPhoneNumberSubmitted}
+           />
         }else{
             
             followUpActions=(<div>
@@ -32,7 +42,7 @@ class ResultPage extends Component{
             </div>)
         }
         console.log(followUpActions);
-        return (<div className="row" >
+        return (<div >
             <div className="emphasizedText" >{this.props.offering}</div>
             {followUpActions}
             

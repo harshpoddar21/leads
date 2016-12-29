@@ -10,128 +10,254 @@ import Header from './Header';
 import FlatButton from 'material-ui/FlatButton';
 import Utility from './Utility';
 import ResultPage from './ResultPage';
+
+import ConnectionManager from './ConnectionManager';
+
+import ReactGA from 'react-ga';
+import CircularProgress from 'material-ui/CircularProgress';
+
 class App extends Component {
 
-    
-    constructor(props){
+
+    constructor(props) {
+
 
         super(props);
-        this.state={answers:0,currentQuestionShown:1,isInterested:3,phoneNumber:null};
+        this.state = {
+            answers: 0,
+            currentQuestionShown: 1,
+            isInterested: 3,
+            phoneNumber: null,
+            loading: false,
+            responseSubmitted: false
+        };
 
-        this.backButtonClicked=this.backButtonClicked.bind(this);
-        this.answerSelected=this.answerSelected.bind(this);
-        this.onInterested=this.onInterested.bind(this);
-        this.onNotInterested=this.onNotInterested.bind(this);
+        this.backButtonClicked = this.backButtonClicked.bind(this);
+        this.answerSelected = this.answerSelected.bind(this);
+        this.onInterested = this.onInterested.bind(this);
+        this.onNotInterested = this.onNotInterested.bind(this);
+        this.onPhoneNumberChanged = this.onPhoneNumberChanged.bind(this);
+        this.onPhoneNumberSubmitted = this.onPhoneNumberSubmitted.bind(this);
 
     }
-    
-    answerSelected(e,value){
 
-        var tha=this;
-        setTimeout(function(){
+    answerSelected(e, value) {
+
+        var tha = this;
+        setTimeout(function () {
 
             console.log("Answer changed");
-            var questionNo=tha.getCurrentQuestionNo();
-            console.log("Answer changed for question "+questionNo);
-            tha.updateAnswerForQuestionNo(value,questionNo);
+            var questionNo = tha.getCurrentQuestionNo();
+            console.log("Answer changed for question " + questionNo);
+            tha.updateAnswerForQuestionNo(value, questionNo);
 
 
-        },200);
+        }, 200);
     }
 
 
     render() {
-        const content=(this.getCurrentQuestionNo()!=-1)?<QuestionAnswer optionSelected={this.getAnswerToQuestionNo(this.getCurrentQuestionNo())} answerSelected={this.answerSelected} questionAnswer={this.props.questionAnswers[this.getCurrentQuestionNo()-1]} /> : <ResultPage onInterested={this.onInterested} onNotInterested={this.onNotInterested} offering={this.getOfferingText()} isInterested={this.state.isInterested} phoneNumber={this.state.phoneNumber} />
 
-        const bottomPanel=(this.getCurrentQuestionNo()!=-1)?(<BottomNavigation leftButton={(
+
+        var questionAnswer = this.props.questionAnswers[this.getCurrentQuestionNo() - 1];
+        const content = !this.state.responseSubmitted ? (this.getCurrentQuestionNo() != -1) ?
+            <QuestionAnswer optionSelected={this.getAnswerToQuestionNo(this.getCurrentQuestionNo())}
+                            answerSelected={this.answerSelected}
+                            question={questionAnswer.question}
+                            options={questionAnswer.depends!=undefined?
+                            questionAnswer.options[this.getAnswerToQuestionNo(questionAnswer.depends)-1]:
+                            questionAnswer.options
+                            }
+            />
+            : <ResultPage onPhoneNumberChanged={this.onPhoneNumberChanged} onInterested={this.onInterested}
+                          onPhoneNumberSubmitted={this.onPhoneNumberSubmitted}
+                          onNotInterested={this.onNotInterested} offering={this.getOfferingText()}
+                          isInterested={this.state.isInterested} phoneNumber={this.state.phoneNumber}/>
+            :
+            <div>{this.state.isInterested ? "We are very excited to have you on-board. We look forward to serving you soon" : "A Shuttl executive will call you in next 24 hours to resolve all your queries."}</div>;
+        const bottomPanel = (this.getCurrentQuestionNo() != -1 && !this.state.responseSubmitted) ? (
+            <BottomNavigation leftButton={(
                    <FlatButton label="Back" onTouchTap={this.backButtonClicked} />
-                   )} /> ):null;
+                   )}/> ) : null;
 
-                                            return (
-        <MuiThemeProvider>
+        return (
+            <MuiThemeProvider>
 
-            <div style={{marginLeft:"20px",marginTop:"35px"}}>
-            <Header logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="90px" height="47px" marginBottom="40px"  />
-            {content}
+                <div style={{marginLeft:"20px",marginTop:"35px"}}>
+                    <Header logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="75px" height="24px"
+                            marginBottom="40px"/>
+                    {this.state.loading &&
+                    <CircularProgress size={60} thickness={7} style={{position:"fixed",top:"50%",left:"50%"}}/>}
+                    {content}
 
-                {bottomPanel}
+                    {bottomPanel}
 
-            </div>
-        </MuiThemeProvider>
-    );
-  }
+                </div>
+            </MuiThemeProvider>
+        );
+    }
 
-    backButtonClicked(){
+    backButtonClicked() {
 
-        if (this.state.currentQuestionShown>1){
 
-            this.setState({currentQuestionShown:this.state.currentQuestionShown-1});
+        if (this.state.currentQuestionShown > 1) {
+
+
+            this.setState({currentQuestionShown: this.state.currentQuestionShown - 1});
+            this.sendPageViewForCurrentPage();
         }
+
 
     }
 
-    getCurrentQuestionNo(){
-
+    getCurrentQuestionNo() {
 
 
         return this.state.currentQuestionShown;
 
     }
 
-    updateQuestionNoShownForAnswer(){
+    updateQuestionNoShownForAnswer() {
 
-        if (this.state.currentQuestionShown<this.props.questionAnswers.length){
-
-
-            this.setState({currentQuestionShown:this.state.currentQuestionShown+1});
-
-        }else{
+        if (this.state.currentQuestionShown < this.props.questionAnswers.length) {
 
 
-            this.setState({currentQuestionShown:-1});
+            this.setState({currentQuestionShown: this.state.currentQuestionShown + 1});
+
+
+        } else {
+
+
+            this.setState({currentQuestionShown: -1});
+
         }
-
+        this.sendPageViewForCurrentPage();
 
     }
 
-    updateAnswerForQuestionNo(answer,questionNo){
-        
-        var decAnswer=((Math.pow(16,questionNo-1))*answer)+Utility.hexToDecimal(this.state.answers)-(this.getAnswerToQuestionNo(questionNo)*(Math.pow(16,(questionNo-1))));
+    updateAnswerForQuestionNo(answer, questionNo) {
 
-        console.log(answer+","+questionNo);
-        console.log("Dec Answer"+decAnswer);
-        console.log(Utility.decimalToHex(decAnswer));
-        this.setState({answers:Utility.decimalToHex(decAnswer)});
+        var decAnswer = ((Math.pow(16, questionNo - 1)) * answer) + Utility.hexToDecimal(this.state.answers) - (this.getAnswerToQuestionNo(questionNo) * (Math.pow(16, (questionNo - 1))));
+
+        this.setState({answers: Utility.decimalToHex(decAnswer)});
+        ReactGA.ga("send","event",this.props.questionAnswers[questionNo-1].question,"Answered",this.getHumanReadableAnswerToQuestionNo(questionNo));
         this.updateQuestionNoShownForAnswer();
     }
 
-    getAnswerToQuestionNo(questionsNo){
+    getAnswerToQuestionNo(questionsNo) {
 
-        console.log("answer for question no "+questionsNo+" with answers "+this.state.answers);
-        return ((Utility.hexToDecimal(this.state.answers)%(Math.pow(16,questionsNo))-Utility.hexToDecimal(this.state.answers)%(Math.pow(16,(questionsNo-1)))))/Math.pow(16,questionsNo-1);
+        console.log("answer for question no " + questionsNo + " with answers " + this.state.answers);
+        return ((Utility.hexToDecimal(this.state.answers) % (Math.pow(16, questionsNo)) - Utility.hexToDecimal(this.state.answers) % (Math.pow(16, (questionsNo - 1))))) / Math.pow(16, questionsNo - 1);
     }
 
-    getOfferingText(){
-
-        
-        var from=this.getAnswerToQuestionNo(2);
-        var to=this.getAnswerToQuestionNo(3);
-        
-        return "Premium AC Bus available from "+this.props.questionAnswers[1].options[from-1]+" to "+this.props.questionAnswers[2].options[to-1]+" @ Rs 50. Book for a Free Trial.";
-    }
-    
-    onInterested(){
-    
-        this.setState({isInterested:1});
-        
-    }
-    
-    onNotInterested(){
+    getOfferingText() {
 
 
-        this.setState({isInterested:2});
+        var toCity = this.getAnswerToQuestionNo(2);
+        var fromCity = this.getAnswerToQuestionNo(4);
+        var toStr = this.props.questionAnswers[2].options[toCity - 1][this.getAnswerToQuestionNo(3) - 1];
+        var fromStr = this.props.questionAnswers[4].options[fromCity - 1][this.getAnswerToQuestionNo(5) - 1];
+        return "Premium AC Bus available from " + fromStr + " to " + toStr + " @ Rs 50. Book for a Free Trial.";
     }
+
+    onInterested() {
+
+        this.setState({isInterested: 1});
+        this.sendPageViewForCurrentPage();
+
+    }
+
+    onNotInterested() {
+
+
+        this.setState({isInterested: 2});
+        this.sendPageViewForCurrentPage();
+    }
+
+    onPhoneNumberChanged(e, phoneNumber) {
+
+
+        console.log("phonenumber " + phoneNumber);
+        this.setState({phoneNumber: phoneNumber});
+
+    }
+
+    onPhoneNumberSubmitted() {
+
+        if (/\d{10,10}/.test(this.state.phoneNumber)) {
+
+
+            this.setState({loading: true});
+            var tha = this;
+            ConnectionManager.submitLeadAsync(this.state, function (response) {
+
+                if (response.success) {
+
+                    tha.setState({responseSubmitted: true, loading: false});
+                    this.sendPageViewForCurrentPage();
+                } else {
+
+                    alert("Some Error Occurred");
+                }
+            });
+        }
+
+    }
+
+
+
+     sendPageViewForCurrentPage() {
+
+         if (this.getCurrentQuestionNo()!=-1){
+
+             ReactGA.ga("set","page",this.props.questionAnswers[this.getCurrentQuestionNo()-1].question);
+             ReactGA.ga("send","pageview");
+         }else {
+
+             if (!this.state.responseSubmitted) {
+                 if (this.state.isInterested == 3) {
+
+
+                     ReactGA.ga("set", "page", "interest inquiry");
+                     ReactGA.ga("send", "pageview");
+                 } else if (this.state.isInterested == 1) {
+
+                     ReactGA.ga("set", "page", "interested");
+                     ReactGA.ga("send", "pageview");
+
+                 } else {
+
+
+                     ReactGA.ga("set", "page", "not interested");
+                     ReactGA.ga("send", "pageview");
+                 }
+             }else{
+
+                 ReactGA.ga("set", "page", "response submitted");
+                 ReactGA.ga("send", "pageview");
+             }
+         }
+
+     }
+
+
+    getHumanReadableAnswerToQuestionNo(questionNo){
+
+        var answer=this.getAnswerToQuestionNo(questionNo);
+        if (this.props.questionAnswers[questionNo-1].depends!=undefined){
+
+            var dependentAnswer=this.getAnswerToQuestionNo(this.props.questionAnswers[questionNo-1].depends);
+            return this.props.questionAnswers[questionNo-1].options[dependentAnswer][answer];
+        }else{
+            
+            return this.props.questionAnswers[questionNo-1].options[answer];
+        }
+
+    }
+
 
 }
+
+
 
 export default App;

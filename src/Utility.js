@@ -18,6 +18,10 @@ class Utility {
     }
 
 
+    static getCurrentTimeInUnix(){
+
+        return (new Date()).getTime();
+    }
 
 
 }
