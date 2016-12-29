@@ -194,7 +194,7 @@ class App extends Component {
                 if (response.success) {
 
                     tha.setState({responseSubmitted: true, loading: false});
-                    this.sendPageViewForCurrentPage();
+                    tha.sendPageViewForCurrentPage();
                 } else {
 
                     alert("Some Error Occurred");
