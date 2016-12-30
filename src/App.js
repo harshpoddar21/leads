@@ -76,7 +76,7 @@ class App extends Component {
             :
             <div>{this.state.isInterested ? "We are very excited to have you on-board. We look forward to serving you soon" : "A Shuttl executive will call you in next 24 hours to resolve all your queries."}</div>;
         const bottomPanel = (this.getCurrentQuestionNo() != -1 && !this.state.responseSubmitted) ? (
-            <BottomNavigation leftButton={(
+            <BottomNavigation rightButton={(
                    <FlatButton label="Back" onTouchTap={this.backButtonClicked} />
                    )}/> ) : null;
 

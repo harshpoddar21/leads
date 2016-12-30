@@ -20,10 +20,11 @@ class BottomNavigation extends Component {
             width:"100%",
             textAlign:"center",
             position:"absolute",
-            bottom:"0px"
+            bottom:"0px",
+            left:"0px"
         }
         return <div style={stylen}>
-            <div style={{float:"left"}} >{this.props.leftButton}</div>
+            <div style={{float:"right"}} >{this.props.rightButton}</div>
         </div>;
     }
 
