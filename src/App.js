@@ -87,7 +87,7 @@ class App extends Component {
                     <Header logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="75px" height="24px"
                             marginBottom="40px"/>
                     {this.state.loading &&
-                    <CircularProgress size={60} thickness={7} style={{position:"fixed",top:"50%",left:"50%"}}/>}
+                    <CircularProgress size={60} thickness={7} style={{position:"fixed",top:"50%",left:"50%",marginLeft:"-30px"}}/>}
                     {content}
 
                     {bottomPanel}
