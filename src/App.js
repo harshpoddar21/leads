@@ -141,6 +141,11 @@ class App extends Component {
 
         this.setState({answers: Utility.decimalToHex(decAnswer)});
         ReactGA.ga("send","event",this.props.questionAnswers[questionNo-1].question,"Answered",this.getHumanReadableAnswerToQuestionNo(questionNo));
+        window.fbq('track', 'AddToCart', {
+            content_type: 'question',
+            content_name:this.props.questionAnswers[questionNo-1].question,
+            content_ids:[this.getHumanReadableAnswerToQuestionNo(questionNo)]
+        });
         this.updateQuestionNoShownForAnswer();
     }
 
@@ -162,16 +167,34 @@ class App extends Component {
 
     onInterested() {
 
-        this.setState({isInterested: 1});
-        this.sendPageViewForCurrentPage();
+        window.fbq('track', 'AddToCart', {
+            content_type: 'click',
+            content_name:"interested"
+        });
+        ReactGA.ga("send","event","is interested?","answered","interested");
+        this.setState({isInterested: 1},function(){
+
+
+            this.sendPageViewForCurrentPage();
+        });
 
     }
 
     onNotInterested() {
 
+        window.fbq('track', 'AddToCart', {
+            content_type: 'click',
+            content_name:"not interested"
+        });
 
-        this.setState({isInterested: 2});
-        this.sendPageViewForCurrentPage();
+        ReactGA.ga("send","event","is interested?","answered","not interested");
+        this.setState({isInterested: 2},function(){
+
+
+            this.sendPageViewForCurrentPage();
+
+        });
+
     }
 
     onPhoneNumberChanged(e, phoneNumber) {
@@ -187,6 +210,12 @@ class App extends Component {
         if (/\d{10,10}/.test(this.state.phoneNumber)) {
 
 
+            window.fbq('track', 'AddToCart', {
+                content_type: 'click',
+                content_name:"phone number submit"
+            });
+
+            ReactGA.ga("send","event","Phone Number","submitted");
             this.setState({loading: true});
             var tha = this;
             ConnectionManager.submitLeadAsync(this.state, function (response) {
@@ -195,6 +224,12 @@ class App extends Component {
 
                     tha.setState({responseSubmitted: true, loading: false});
                     tha.sendPageViewForCurrentPage();
+                    window.fbq('track', 'Lead', {
+                        content_type: 'lead_type',
+                        content_name:tha.state.isInterested==1?"Interested":"Not Interested"
+                    });
+
+                    ReactGA.ga("send","event","Lead",tha.state.isInterested==1?"Interested":"Not Interested");
                 } else {
 
                     alert("Some Error Occurred");
@@ -210,8 +245,12 @@ class App extends Component {
 
          if (this.getCurrentQuestionNo()!=-1){
 
-             ReactGA.ga("set","page",this.props.questionAnswers[this.getCurrentQuestionNo()-1].question);
+             ReactGA.ga("set","page",this.getHumanReadableCurrentQuestion());
              ReactGA.ga("send","pageview");
+             window.fbq('track', 'ViewContent', {
+                 content_type: 'page view',
+                 content_name:this.getHumanReadableCurrentQuestion()
+             });
          }else {
 
              if (!this.state.responseSubmitted) {
@@ -220,22 +259,38 @@ class App extends Component {
 
                      ReactGA.ga("set", "page", "interest inquiry");
                      ReactGA.ga("send", "pageview");
+                     window.fbq('track', 'ViewContent', {
+                         content_type: 'page view',
+                         content_name:"interest inquiry"
+                     });
                  } else if (this.state.isInterested == 1) {
 
                      ReactGA.ga("set", "page", "interested");
                      ReactGA.ga("send", "pageview");
-
+                     window.fbq('track', 'ViewContent', {
+                         content_type: 'page view',
+                         content_name:"interested"
+                     });
                  } else {
 
 
                      ReactGA.ga("set", "page", "not interested");
                      ReactGA.ga("send", "pageview");
+                     window.fbq('track', 'ViewContent', {
+                         content_type: 'page view',
+                         content_name:"not interested"
+                     });
                  }
              }else{
 
                  ReactGA.ga("set", "page", "response submitted");
                  ReactGA.ga("send", "pageview");
+                 window.fbq('track', 'ViewContent', {
+                     content_type: 'page view',
+                     content_name:"response submitted"
+                 });
              }
+
          }
 
      }
@@ -253,6 +308,12 @@ class App extends Component {
             return this.props.questionAnswers[questionNo-1].options[answer-1];
         }
 
+    }
+    
+    
+    getHumanReadableCurrentQuestion(){
+
+        return this.props.questionAnswers[this.getCurrentQuestionNo()-1].question;
     }
 
 

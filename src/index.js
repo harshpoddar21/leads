@@ -35,7 +35,7 @@ const questionAnswer=[
         question:"My Office is located at/near ",
         options:[
             
-            ["MG Road","Sohna Road","Cyber City","Udhyog Vihar","Hero Honda","Medanta"],
+            ["MG Road","Sohna Road","Huda City Center","Cyber City","Gold Course Road","IFFCO Chowk","Udhyog Vihar","Hero Honda","Medanta-Sector 32"],
             ["Okhla","Jasola","Nehru Place","Bhikaji Cama","AIIMS","Saket"],
             ["Sector 62","Sector 15","Sector 16","Noida City Center"]
         ],
@@ -52,6 +52,7 @@ const questionAnswer=[
             "Delhi",
             "Noida",
             "Faridabad"
+
         ]
     },
 
@@ -63,7 +64,7 @@ const questionAnswer=[
             ["Huda City Center","Iffco Chowk"],
             ["Hauz Khas","Saket","AIIMS","Kalkaji","Greater Kailash"],
             ["Noida City Center"],
-            ["Ajronda","Neharpar","Sector 37"]
+            ["NIT 1-5","Sainik Colony","Ballabhgarh","Ajronda","Neharpar","Sector 31-37","Sector 21C,45","Greenfield"]
         ],
         depends:4
     }
