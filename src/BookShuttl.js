@@ -3,6 +3,7 @@ import ShuttlSelectGroup from './ShuttlSelectGroup';
 import ShuttlSelectBox from './ShuttlSelectBox';
 import Utility from './Utility';
 
+import ReactGA from 'react-ga';
 import FlatButton from 'material-ui/FlatButton';
 import ConnectionManager from './ConnectionManager';
 
@@ -17,6 +18,11 @@ class BookShuttl extends Component {
         this.state={loading:false,optionSelected:0,data:data,responseSubmitted:false};
         this.bookingSelected=this.bookingSelected.bind(this);
         this.onBookingSubmitted=this.onBookingSubmitted.bind(this);
+        window.fbq('track', 'ViewContent', {
+            content_type: 'page view',
+            content_name:"book shuttl"
+        });
+
     }
 
 
@@ -64,14 +70,31 @@ class BookShuttl extends Component {
     bookingSelected(event,value){
 
         this.setState({optionSelected:value});
+
+        ReactGA.ga("send","event","time slot","selected",value%86400);
+        window.fbq('track', 'AddToCart', {
+            content_type: 'click',
+            content_name:"time slot",
+            value:value%86400
+        });
     }
 
     onBookingSubmitted(){
 
         this.setState({loading:true});
         var tha=this;
+
+
+
         ConnectionManager.submitBoarding(this.state,function(response){
 
+
+            ReactGA.ga("set", "page", "booking done");
+            ReactGA.ga("send", "pageview");
+            window.fbq('track', 'ViewContent', {
+                content_type: 'page view',
+                content_name:"booking done"
+            });
             tha.setState({loading:false});
             if (response.success){
                 
@@ -90,7 +113,8 @@ class BookShuttl extends Component {
         this.setState({loading:true});
         var tha=this;
         ConnectionManager.getBoardingDetails(this.state.data,function(response){
-            
+
+            ReactGA.ga('set', 'userId', response["data"]["phoneNumber"]);
             tha.setState({loading:false});
             tha.setState({result:response});
             

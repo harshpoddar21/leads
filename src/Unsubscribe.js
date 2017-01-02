@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ConnectionManager from './ConnectionManager';
 import Utility from './Utility';
 
+import ReactGA from 'react-ga';
 import CircularProgress from 'material-ui/CircularProgress';
 import FlatButton from 'material-ui/FlatButton';
 
