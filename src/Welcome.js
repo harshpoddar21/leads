@@ -10,6 +10,8 @@ class Welcome extends Component {
 
         super(props);
         this.startLeadGathering=this.startLeadGathering.bind(this);
+        ReactGA.ga("set","page","welcome");
+        ReactGA.ga("send","pageview");
     }
 
     render(){

@@ -46,7 +46,7 @@ class App extends Component {
             content_type: 'page view',
             content_name:"I commute office by"
         });
-
+        this.sendPageViewForCurrentPage();
     }
 
     answerSelected(e, value) {
