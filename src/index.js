@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import ReactGA from 'react-ga';
-import { Router, Route, Link,browserHistory,IndexRoute} from 'react-router'
+import { Router, Route, Link,browserHistory,IndexRoute} from 'react-router';
 import BookShuttl from './BookShuttl';
 import Unsubscribe from './Unsubscribe';
 import AppWrapper from './AppWrapper';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Welcome from './Welcome';
 injectTapEventPlugin();
 
 
@@ -94,6 +95,8 @@ ReactDOM.render(
             <Route path="book_shuttl" component={BookShuttl} />
             <IndexRoute component={Appi}/>
             <Route path="unsubscribe" component={Unsubscribe} />
+
+            <Route path="welcome" component={Welcome} />
         </Route>
     </Router>),
   document.getElementById('root')
