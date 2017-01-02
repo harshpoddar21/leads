@@ -6,7 +6,7 @@ class ConnectionManager{
 
     static submitLeadAsync(data,callback){
 
-        var BASE=!data || data["utm_campaign"]!="local_testing" ?"http://myor.shuttl.com":"http://localhost:3000";
+        var BASE="http://myor.shuttl.com";
         var SUBMIT_LEAD=BASE+"/lead/submitNewLead";
 
         ConnectionManager.makeAsyncHttpCallPostCall(SUBMIT_LEAD,data,callback);
@@ -16,7 +16,7 @@ class ConnectionManager{
     static getBoardingDetails(data,callback){
 
 
-        var BASE=(!data || data["utm_campaign"]!="local_testing")  ?"http://myor.shuttl.com":"http://localhost:3000";
+        var BASE="http://myor.shuttl.com";
         var GET_BOARDING_DETAILS=BASE+"/boarding/getBoardingDetails";
         
         ConnectionManager.makeAsyncHttpCallGetCall(GET_BOARDING_DETAILS,data,callback);
@@ -52,7 +52,7 @@ class ConnectionManager{
     }
     
     static submitBoarding(data,callback){
-        var BASE=(!data || data["utm_campaign"]!="local_testing")  ?"http://myor.shuttl.com":"http://localhost:3000";
+        var BASE="http://myor.shuttl.com";
         var SUBMIT_BOARDING=BASE+"/boarding/submitBoarding";
 
         ConnectionManager.makeAsyncHttpCallPostCall(SUBMIT_BOARDING,data,callback);
@@ -60,7 +60,7 @@ class ConnectionManager{
     }
     
     static unsubscribeUser(data,callback){
-        var BASE=(!data || data["utm_campaign"]!="local_testing")  ?"http://myor.shuttl.com":"http://localhost:3000";
+        var BASE="http://myor.shuttl.com";
         var UNSUBSCRIBE=BASE+"/boarding/unsubscribe";
 
         ConnectionManager.makeAsyncHttpCallGetCall(UNSUBSCRIBE,data,callback);
@@ -69,3 +69,4 @@ class ConnectionManager{
 }
 
 export default ConnectionManager;
+
