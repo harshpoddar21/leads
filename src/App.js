@@ -233,9 +233,10 @@ class App extends Component {
             var tha = this;
             ConnectionManager.submitLeadAsync(this.state, function (response) {
 
-                tha.setState({responseSubmitted: true, loading: false});
+                tha.setState({loading: false});
                 if (response.success) {
 
+                    tha.setState({responseSubmitted: true});
                     tha.sendPageViewForCurrentPage();
                     window.fbq('track', 'Lead', {
                         content_type: 'lead_type',
@@ -245,6 +246,7 @@ class App extends Component {
                     ReactGA.ga("send","event","Lead",tha.state.isInterested==1?"Interested":"Not Interested");
                 } else {
 
+                    tha.setState({phoneNumber:""});
                     alert(response.message);
                 }
             });

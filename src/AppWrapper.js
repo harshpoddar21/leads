@@ -14,13 +14,9 @@ class AppWrapper extends Component {
 
         return    (<MuiThemeProvider>
             <div style={{marginLeft:"20px",marginTop:"35px"}}>
-                <Header onTouchTap={this.refresh} logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="75px" height="24px"
+                <Header  logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="75px" height="24px"
                         marginBottom="40px"/>
         {this.props.children}</div></MuiThemeProvider>);
-    }
-    refresh(){
-
-        window.location.reload();
     }
 }
 

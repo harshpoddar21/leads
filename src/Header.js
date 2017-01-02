@@ -12,12 +12,17 @@ class Header extends Component {
 
         return (
 
-            <div style={{marginBottom:this.props.marginBottom}}>
-                <img src={this.props.logo} width={this.props.width} height={this.props.height} style={{marginLeft : this.props.marginLeft,marginTop:this.props.marginTop}} />
+            <div style={{marginBottom:this.props.marginBottom}} >
+                <img onTouchTap={this.refresh} src={this.props.logo} width={this.props.width} height={this.props.height} style={{marginLeft : this.props.marginLeft,marginTop:this.props.marginTop,cursor:"pointer"}} />
             </div>
         );
 
 
+    }
+
+    refresh(){
+
+        window.location.reload();
     }
 }
 
