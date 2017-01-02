@@ -25,7 +25,7 @@ class App extends Component {
         super(props);
         var urlparams=Utility.getQueryParams(window.location.search)?Utility.getQueryParams(window.location.search):{};
         this.state = {
-            answers: urlparams["answer"]?urlparams["answer"]:0,
+            answers: urlparams["prefilled_answer"]?urlparams["prefilled_answer"]:0,
             currentQuestionShown: 1,
             isInterested: 3,
             phoneNumber: null,
@@ -175,7 +175,7 @@ class App extends Component {
         var fromCity = this.getAnswerToQuestionNo(4);
         var toStr = this.props.questionAnswers[2].options[toCity - 1][this.getAnswerToQuestionNo(3) - 1];
         var fromStr = this.props.questionAnswers[4].options[fromCity - 1][this.getAnswerToQuestionNo(5) - 1];
-        return "Premium AC Bus available from " + fromStr + " to " + toStr + " @ Rs 50. Book for a Free Trial.";
+        return "Shuttl from " + fromStr + " to " + toStr + " every 10 minutes with assured seat at Rs 50 only. Interested?";
     }
 
     onInterested() {
@@ -233,9 +233,9 @@ class App extends Component {
             var tha = this;
             ConnectionManager.submitLeadAsync(this.state, function (response) {
 
+                tha.setState({responseSubmitted: true, loading: false});
                 if (response.success) {
 
-                    tha.setState({responseSubmitted: true, loading: false});
                     tha.sendPageViewForCurrentPage();
                     window.fbq('track', 'Lead', {
                         content_type: 'lead_type',
@@ -315,7 +315,7 @@ class App extends Component {
         if (this.props.questionAnswers[questionNo-1].depends!=undefined){
 
             var dependentAnswer=this.getAnswerToQuestionNo(this.props.questionAnswers[questionNo-1].depends);
-            return this.props.questionAnswers[questionNo-1].options[dependentAnswer-1][answer];
+            return this.props.questionAnswers[questionNo-1].options[dependentAnswer-1][answer-1];
         }else{
             
             return this.props.questionAnswers[questionNo-1].options[answer-1];

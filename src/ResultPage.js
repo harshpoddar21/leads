@@ -35,7 +35,7 @@ class ResultPage extends Component{
             
             followUpActions=(<div>
                 <div  style={{width:"300px",marginBottom:"10px"}}>
-                <FlatButton label="Great I am interested" primary={true} onTouchTap={this.props.onInterested} />
+                <FlatButton label="Book a free trial" primary={true} onTouchTap={this.props.onInterested} />
                     </div>
                 <div  style={{width:"300px",marginBottom:"10px"}}>
                     <FlatButton label="Amm.. I have some queries" onTouchTap={this.props.onNotInterested} /></div>
