@@ -221,7 +221,7 @@ class App extends Component {
     onPhoneNumberSubmitted() {
 
         if (/\d{10,10}/.test(this.state.phoneNumber)) {
-
+            ReactGA.ga('set', 'userId', this.state.phoneNumber);
 
             window.fbq('track', 'AddToCart', {
                 content_type: 'click',
