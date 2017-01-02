@@ -18,12 +18,12 @@ class Welcome extends Component {
 
         return <div>
             <p>Remember the last time you took a Shuttl ride to office ?</p>
-            <p style={{marginLeft:"74px"}}>A lot has changed since then</p>
+            <p >A lot has changed since then</p>
 
-            <p>Now travel from Faridabad to Gurgaon at just Rs 50 :</p>
+            <p>Now travel from <b>Faridabad to Gurgaon at just Rs 50 </b>:</p>
             <ul><li>Short Routes</li><li>Bus every 10 minutes</li><li>Dedicated On-Ground Executives</li></ul>
             <p>Experience it yourself</p>
-            <RaisedButton label="Get A Free Trial Now" primary={true}  onTouchTap={this.startLeadGathering}/>
+            <RaisedButton style={{marginTop:"20px"}} label="Get A Free Trial Now" primary={true}  onTouchTap={this.startLeadGathering}/>
 
         </div>;
     }
