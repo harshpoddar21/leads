@@ -3,9 +3,19 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import ReactGA from 'react-ga';
+import { Router, Route, Link,browserHistory,IndexRoute} from 'react-router'
+import BookShuttl from './BookShuttl';
+import Unsubscribe from './Unsubscribe';
+import AppWrapper from './AppWrapper';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+
+/*
+* Please see
+* if you are changing order of question no please make relevant change in App.js wherein were are finding 
+* answer to question no based on this info and also last page where this info is displayed
+* */
 const questionAnswer=[
 
     {
@@ -72,8 +82,19 @@ const questionAnswer=[
 
 ];
 
+const Appi=React.createClass({
+    render(){
+        return <App questionAnswers={questionAnswer} />
+    }});
 ReactGA.initialize("UA-77497361-3");
 ReactDOM.render(
-  <App questionAnswers={questionAnswer} />,
+
+    (<Router history={browserHistory}>
+        <Route path="/" component={AppWrapper} >
+            <Route path="book_shuttl" component={BookShuttl} />
+            <IndexRoute component={Appi}/>
+            <Route path="unsubscribe" component={Unsubscribe} />
+        </Route>
+    </Router>),
   document.getElementById('root')
 );

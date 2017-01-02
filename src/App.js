@@ -23,13 +23,17 @@ class App extends Component {
 
 
         super(props);
+        var urlparams=Utility.getQueryParams(window.location.search)?Utility.getQueryParams(window.location.search):{};
         this.state = {
-            answers: 0,
+            answers: urlparams["answer"]?urlparams["answer"]:0,
             currentQuestionShown: 1,
             isInterested: 3,
             phoneNumber: null,
             loading: false,
-            responseSubmitted: false
+            responseSubmitted: false,
+            utm_source:urlparams["utm_source"],
+            utm_medium:urlparams["utm_medium"],
+            utm_campaign:urlparams["utm_campaign"]
         };
 
         this.backButtonClicked = this.backButtonClicked.bind(this);
@@ -60,6 +64,10 @@ class App extends Component {
 
 
         var questionAnswer = this.props.questionAnswers[this.getCurrentQuestionNo() - 1];
+        if (!this.state.utm_campaign || !this.state.utm_medium || !this.state.utm_source){
+
+            return <div>Something bad has occurrend.</div>;
+        }
         const content = !this.state.responseSubmitted ? (this.getCurrentQuestionNo() != -1) ?
             <QuestionAnswer optionSelected={this.getAnswerToQuestionNo(this.getCurrentQuestionNo())}
                             answerSelected={this.answerSelected}
@@ -81,19 +89,14 @@ class App extends Component {
                    )}/> ) : null;
 
         return (
-            <MuiThemeProvider>
-
-                <div style={{marginLeft:"20px",marginTop:"35px"}}>
-                    <Header logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="75px" height="24px"
-                            marginBottom="40px"/>
+         <div>
                     {this.state.loading &&
                     <CircularProgress size={60} thickness={7} style={{position:"fixed",top:"50%",left:"50%",marginLeft:"-30px"}}/>}
                     {content}
 
                     {bottomPanel}
 
-                </div>
-            </MuiThemeProvider>
+         </div>
         );
     }
 
@@ -140,6 +143,16 @@ class App extends Component {
         var decAnswer = ((Math.pow(16, questionNo - 1)) * answer) + Utility.hexToDecimal(this.state.answers) - (this.getAnswerToQuestionNo(questionNo) * (Math.pow(16, (questionNo - 1))));
 
         this.setState({answers: Utility.decimalToHex(decAnswer)});
+        if (questionNo==1){
+
+            this.setState({moc:this.getHumanReadableAnswerToQuestionNo(questionNo)});
+        }else if (questionNo==3){
+
+            this.setState({to:this.getHumanReadableAnswerToQuestionNo(questionNo)});
+        }else if (questionNo==5){
+            
+            this.setState({from:this.getHumanReadableAnswerToQuestionNo(questionNo)});
+        }
         ReactGA.ga("send","event",this.props.questionAnswers[questionNo-1].question,"Answered",this.getHumanReadableAnswerToQuestionNo(questionNo));
         window.fbq('track', 'AddToCart', {
             content_type: 'question',
@@ -232,7 +245,7 @@ class App extends Component {
                     ReactGA.ga("send","event","Lead",tha.state.isInterested==1?"Interested":"Not Interested");
                 } else {
 
-                    alert("Some Error Occurred");
+                    alert(response.message);
                 }
             });
         }
