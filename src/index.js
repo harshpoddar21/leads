@@ -72,8 +72,8 @@ const questionAnswer=[
         question:"My home is located near ",
         options:[
 
-            ["Huda City Center","Iffco Chowk"],
-            ["Hauz Khas","Saket","AIIMS","Kalkaji","Greater Kailash"],
+            ["Huda City Center","Iffco Chowk","MG Road"],
+            ["Hauz Khas","Saket","AIIMS","Kalkaji","Greater Kailash","Govind Puri","Sarita Vihar","East Kailash"],
             ["Noida City Center"],
             ["NIT 1-5","Sainik Colony","Ballabhgarh","Ajronda","Neharpar","Sector 31-37","Sector 21C,45","Greenfield"]
         ],
