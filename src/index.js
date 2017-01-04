@@ -9,6 +9,7 @@ import Unsubscribe from './Unsubscribe';
 import AppWrapper from './AppWrapper';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Welcome from './Welcome';
+import WelcomeNewRes from './WelcomeNewRes';
 injectTapEventPlugin();
 
 
@@ -96,6 +97,7 @@ ReactDOM.render(
             <IndexRoute component={Appi}/>
             <Route path="unsubscribe" component={Unsubscribe} />
 
+            <Route path="welcomeNewRes" component={WelcomeNewRes} />
             <Route path="welcome" component={Welcome} />
         </Route>
     </Router>),
