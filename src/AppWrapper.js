@@ -14,7 +14,7 @@ class AppWrapper extends Component {
 
         return    (<MuiThemeProvider>
             <div style={{marginLeft:"20px",marginTop:"35px"}}>
-                <Header  logo="http://mycommute.shuttl.com/images/shuttl-logo.png" width="75px" height="24px"
+                <Header  logo="/images/shuttl.png" width="100px"
                         marginBottom="40px"/>
         {this.props.children}</div></MuiThemeProvider>);
     }
