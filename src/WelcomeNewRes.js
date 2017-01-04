@@ -21,7 +21,7 @@ class WelcomeNewRes extends Component {
 
 
 
-            <ul><li>Short every 10 mins</li><li>Assured seat</li><li>At Rs 50 only</li></ul>
+            <ul><li>Shuttl every 10 mins</li><li>Assured seat</li><li>At Rs 50 only</li></ul>
             <p>Experience it yourself</p>
             <RaisedButton style={{marginTop:"20px"}} label="Get A Free Trial Now" primary={true}  onTouchTap={this.startLeadGathering}/>
 

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7983a47e-eb51-46aa-9e49-bac4c80d748d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.107201c6.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.107201c6.js.map" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/asset-manifest.json" afterPath="$PROJECT_DIR$/build/asset-manifest.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/WelcomeNewRes.js" afterPath="$PROJECT_DIR$/src/WelcomeNewRes.js" />
     </list>
     <ignored path="leads.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +36,8 @@
       <file leaf-file-name="WelcomeNewRes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/WelcomeNewRes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+            <state relative-caret-position="315">
+              <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -80,7 +76,7 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1483533250223" expanded="true" signature="0:196" placeholder="{&quot;main.css&quot;: &quot;static/css/main.80f2e66c.css&quot;...}" />
+                <marker date="1483533324939" expanded="true" signature="0:196" placeholder="{&quot;main.css&quot;: &quot;static/css/main.80f2e66c.css&quot;...}" />
               </folding>
             </state>
           </provider>
@@ -564,12 +560,12 @@
       <workItem from="1483466375439" duration="1204000" />
       <workItem from="1483468214911" duration="773000" />
       <workItem from="1483494662991" duration="35000" />
-      <workItem from="1483532248871" duration="1058000" />
+      <workItem from="1483532248871" duration="1538000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136122000" />
+    <option name="totallyTimeSpent" value="136602000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
@@ -927,7 +923,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1483533250223" expanded="true" signature="0:196" placeholder="{&quot;main.css&quot;: &quot;static/css/main.80f2e66c.css&quot;...}" />
+            <marker date="1483533324939" expanded="true" signature="0:196" placeholder="{&quot;main.css&quot;: &quot;static/css/main.80f2e66c.css&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -971,8 +967,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WelcomeNewRes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+        <state relative-caret-position="315">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
           <folding />
         </state>
       </provider>
