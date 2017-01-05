@@ -42,10 +42,7 @@ class App extends Component {
         this.onNotInterested = this.onNotInterested.bind(this);
         this.onPhoneNumberChanged = this.onPhoneNumberChanged.bind(this);
         this.onPhoneNumberSubmitted = this.onPhoneNumberSubmitted.bind(this);
-        window.fbq('track', 'ViewContent', {
-            content_type: 'page view',
-            content_name:"I commute office by"
-        });
+
         this.sendPageViewForCurrentPage();
     }
 
