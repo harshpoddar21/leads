@@ -4,7 +4,7 @@ import ShuttlSelectBox from './ShuttlSelectBox';
 import Utility from './Utility';
 
 import ReactGA from 'react-ga';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import ConnectionManager from './ConnectionManager';
 
 import CircularProgress from 'material-ui/CircularProgress';
@@ -53,10 +53,10 @@ class BookShuttl extends Component {
                     />
                 })
                 }
-                {this.state.result && this.state.timeSlotSelected!=0 &&
+                {this.state.result && this.state.optionSelected!=0 &&
 
-                <FlatButton label="SUBMIT" onTouchTap={this.onBookingSubmitted} primary={true}
-                            disabled={this.state.optionSelected?false:true}/>
+                <RaisedButton label="SUBMIT" style={{marginTop:"10px",width:"160px"}} onTouchTap={this.onBookingSubmitted} primary={true}
+                            disabled={this.state.timeSlotSelected>0 ? false:true}/>
                 }
                 </div>)}
             </div>;

@@ -221,7 +221,7 @@ class App extends Component {
 
     onPhoneNumberSubmitted() {
 
-        if (/\d{10,10}/.test(this.state.phoneNumber)) {
+        if (/^\d{10,10}$/.test(this.state.phoneNumber)) {
             ReactGA.ga('set', 'userId', this.state.phoneNumber);
 
             window.fbq('track', 'AddToCart', {
@@ -251,6 +251,10 @@ class App extends Component {
                     alert(response.message);
                 }
             });
+        }else{
+
+            this.setState({phoneNumber:""});
+            alert("Please enter a valid mobile number");
         }
 
     }
