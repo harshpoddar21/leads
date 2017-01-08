@@ -6,7 +6,7 @@ class ConnectionManager{
 
     static submitLeadAsync(data,callback){
 
-        var BASE="http://localhost:3000";
+        var BASE="http://myor.shuttl.com";
         var SUBMIT_LEAD=BASE+"/lead/submitNewLead";
 
         ConnectionManager.makeAsyncHttpCallPostCall(SUBMIT_LEAD,data,callback);
