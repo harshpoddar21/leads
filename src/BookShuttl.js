@@ -9,15 +9,18 @@ import ConnectionManager from './ConnectionManager';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
+import DaySelector from './DaySelector';
+
 class BookShuttl extends Component {
 
     constructor(props){
         
         super(props);
         var data=Utility.getQueryParams(window.location.search);
-        this.state={loading:false,optionSelected:0,data:data,responseSubmitted:false};
+        this.state={loading:false,optionSelected:0,data:data,responseSubmitted:false,timeSlotSelected:0};
         this.bookingSelected=this.bookingSelected.bind(this);
         this.onBookingSubmitted=this.onBookingSubmitted.bind(this);
+        this.slotSelected=this.slotSelected.bind(this);
         window.fbq('track', 'ViewContent', {
             content_type: 'page view',
             content_name:"book shuttl"
@@ -37,20 +40,26 @@ class BookShuttl extends Component {
                                   style={{position:"fixed",top:"50%",left:"50%",marginLeft:"-30px"}}/>}
                 { this.state.result && (
                 <div>Book Your Shuttl from {this.state.result.data.from} to {this.state.result.data.to}
-                    <ShuttlSelectGroup onChange={this.bookingSelected}>
-                        {
-                            this.state.result.bookingButtons.map(function (option, index) {
-                                return <ShuttlSelectBox key={index+1} onChange={tha.bookingSelected} width="160px"
-                                                        value={option.unixTime} className="answer"
-                                                        valueSelected={tha.state.optionSelected==0?null:tha.state.optionSelected}
-                                                        label={option.label}
-                                />;
-                            })
-                        }
-                        <FlatButton label="SUBMIT" onTouchTap={this.onBookingSubmitted} primary={true}
-                                    disabled={this.state.optionSelected?false:true}/>
-                    </ShuttlSelectGroup>
-                </div>)}</div>;
+
+                    {this.state.optionSelected==0 && <DaySelector onDaySelected={this.bookingSelected} optionSelected={this.state.optionSelected} sessions={this.state.result.sessions}/>}
+
+                {this.state.optionSelected!=0  &&
+                    
+                    this.state.result.sessions[this.state.optionSelected-1].slots.map(function (option, index) {
+                    return <ShuttlSelectBox key={index+1} onChange={tha.slotSelected} width="160px"
+                    value={option.unixTime} className="answer"
+                    valueSelected={tha.state.timeSlotSelected==0?null:tha.state.timeSlotSelected}
+                    label={option.label}
+                    />
+                })
+                }
+                {this.state.result && this.state.timeSlotSelected!=0 &&
+
+                <FlatButton label="SUBMIT" onTouchTap={this.onBookingSubmitted} primary={true}
+                            disabled={this.state.optionSelected?false:true}/>
+                }
+                </div>)}
+            </div>;
         }else if (!this.state.responseSubmitted){
 
             content=<div>Something bad has occurrend</div>;
@@ -71,12 +80,21 @@ class BookShuttl extends Component {
 
         this.setState({optionSelected:value});
 
+    }
+    
+    slotSelected(event,value){
+
+        console.log(value);
+
+        this.setState({timeSlotSelected:value});
+
         ReactGA.ga("send","event","time slot","selected",value%86400);
         window.fbq('track', 'AddToCart', {
             content_type: 'click',
             content_name:"time slot",
             value:value%86400
-        });
+        }); 
+        
     }
 
     onBookingSubmitted(){
