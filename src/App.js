@@ -248,7 +248,13 @@ class App extends Component {
                 } else {
 
                     tha.setState({phoneNumber:""});
+
+                    setTimeout(function(){
+
+                        ReactGA.ga("send","event","Error Lead",response.message);
+                    },1000);
                     alert(response.message);
+
                 }
             });
         }else{
