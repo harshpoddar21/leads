@@ -75,7 +75,7 @@ const questionAnswer=[
 
             ["Huda City Center","Iffco Chowk","MG Road"],
             ["Hauz Khas","Saket","AIIMS","Kalkaji","Greater Kailash","Govind Puri","Sarita Vihar","East Kailash"],
-            ["Noida City Center"],
+            ["Noida City Center","Crossing Republic"],
             ["NIT 1-5","Sainik Colony","Ballabhgarh","Ajronda","Neharpar","Sector 31-37","Sector 21C,45","Greenfield"]
         ],
         depends:4
