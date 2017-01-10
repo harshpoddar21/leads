@@ -7,6 +7,7 @@ import { Router, Route, Link,browserHistory,IndexRoute} from 'react-router';
 import BookShuttl from './BookShuttl';
 import Unsubscribe from './Unsubscribe';
 import AppWrapper from './AppWrapper';
+import AppWrapperNewUser from './AppWrapperNewUser';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Welcome from './Welcome';
 import WelcomeNewRes from './WelcomeNewRes';
@@ -92,6 +93,14 @@ ReactGA.initialize("UA-77497361-3");
 ReactDOM.render(
 
     (<Router history={browserHistory}>
+        <Route path="/newUser" component={AppWrapperNewUser} >
+            <Route path="book_shuttl" component={BookShuttl} />
+            <IndexRoute component={Appi}/>
+            <Route path="unsubscribe" component={Unsubscribe} />
+
+            <Route path="welcomeNewRes" component={WelcomeNewRes} />
+            <Route path="welcome" component={Welcome} />
+        </Route>
         <Route path="/" component={AppWrapper} >
             <Route path="book_shuttl" component={BookShuttl} />
             <IndexRoute component={Appi}/>
