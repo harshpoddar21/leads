@@ -17,13 +17,14 @@ class WelcomeNewRes extends Component {
     render(){
 
         return <div>
-            <p>Please take a seat while you travel for work</p>
+            <p>Shuttl is running <b>AC Premium buses</b> every 10 minutes to your office
+            <br/><br/>
+            Now you can travel with an assured seat at just Rs 50
+                <br/><br/>
+                We are offering a FREE TRIAL for limited period. <b>Book now in 3 simple steps -></b>
+            </p>
 
-
-
-            <ul><li>Shuttl every 10 mins</li><li>Assured seat</li><li>At Rs 50 only</li></ul>
-            <p>Experience it yourself</p>
-            <RaisedButton style={{marginTop:"20px"}} label="Get A Free Trial Now" primary={true}  onTouchTap={this.startLeadGathering}/>
+            <RaisedButton style={{marginTop:"20px"}} label="Book A Free Trial" primary={true}  onTouchTap={this.startLeadGathering}/>
 
         </div>;
     }
