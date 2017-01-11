@@ -83,7 +83,7 @@ class App extends Component {
                           onNotInterested={this.onNotInterested} offering={this.getOfferingText()}
                           isInterested={this.state.isInterested} phoneNumber={this.state.phoneNumber}/>
             :
-            <div>{this.state.isInterested ? "We are very excited to have you on-board. We look forward to serving you soon" : "A Shuttl executive will call you in next 24 hours to resolve all your queries."}</div>;
+            <div>{this.state.isInterested ? "We are very excited to have you on-board. We look forward to serving you soon" : "An executive will get back to you shortly."}</div>;
         const bottomPanel = (this.getCurrentQuestionNo() != -1 && !this.state.responseSubmitted) ? (
             <BottomNavigation rightButton={(
                    <FlatButton label="Back" onTouchTap={this.backButtonClicked} />
@@ -176,7 +176,7 @@ class App extends Component {
         var fromCity = this.getAnswerToQuestionNo(4);
         var toStr = this.props.questionAnswers[2].options[toCity - 1][this.getAnswerToQuestionNo(3) - 1];
         var fromStr = this.props.questionAnswers[4].options[fromCity - 1][this.getAnswerToQuestionNo(5) - 1];
-        return "Shuttl from " + fromStr + " to " + toStr + " every 10 minutes with assured seat at Rs 50 only. Interested?";
+        return "Travel from " + fromStr + " to " + toStr + " for just Rs 50 only. Shuttl runs every 10 mins.";
     }
 
     onInterested() {

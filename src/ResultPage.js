@@ -19,7 +19,7 @@ class ResultPage extends Component{
             followUpActions=<PhoneNumberAcceptor
                 onPhoneNumberChanged={this.props.onPhoneNumberChanged}
                 phoneNumber={this.props.phoneNumber} 
-                description="Great please give us your contact details to start Shuttling!!"
+                description="Booking details will be sent via SMS"
                 onPhoneNumberSubmitted={this.props.onPhoneNumberSubmitted}
             /> ;
                 
@@ -28,17 +28,17 @@ class ResultPage extends Component{
            followUpActions= <PhoneNumberAcceptor 
                onPhoneNumberChanged={this.props.onPhoneNumberChanged} 
                phoneNumber={this.props.phoneNumber} 
-               description="Oh!! Kindly provide us your contact details and we will get in touch with you shortly." 
+               description="Kindly provide us your contact details and we will get in touch with you shortly."
                onPhoneNumberSubmitted={this.props.onPhoneNumberSubmitted}
            />
         }else{
             
             followUpActions=(<div>
                 <div  style={{width:"300px",marginBottom:"10px"}}>
-                <FlatButton label="Book a free trial" primary={true} onTouchTap={this.props.onInterested} />
+                <FlatButton label="Book a FREE TRIAL" primary={true} onTouchTap={this.props.onInterested} />
                     </div>
                 <div  style={{width:"300px",marginBottom:"10px"}}>
-                    <FlatButton label="Amm.. I have some queries" onTouchTap={this.props.onNotInterested} /></div>
+                    <FlatButton label="I have some queries" onTouchTap={this.props.onNotInterested} /></div>
             </div>)
         }
         console.log(followUpActions);
