@@ -16,6 +16,7 @@ class CustomerCare extends Component {
     constructor(props){
 
         super(props);
+        ReactGA.ga("send", "pageview");
 
         this.startChatting=this.startChatting.bind(this);
         window.$zopim||(function(d,s){
@@ -41,7 +42,7 @@ class CustomerCare extends Component {
     startChatting(){
 
 
-
+        ReactGA.ga("send","event","customer_query","booking id",window.location.search.split("&")[0].split("=")[1]);
         window.$zopim(function() {
             window.$zopim.livechat.setName("Customer");
             window.$zopim.livechat.setPhone(window.location.search.split("&")[0].split("=")[1]);
