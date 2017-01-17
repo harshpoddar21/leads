@@ -11,6 +11,7 @@ import AppWrapperNewUser from './AppWrapperNewUser';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Welcome from './Welcome';
 import WelcomeNewRes from './WelcomeNewRes';
+import CustomerCare from './CustomerCare';
 injectTapEventPlugin();
 
 
@@ -103,6 +104,8 @@ ReactDOM.render(
         </Route>
         <Route path="/" component={AppWrapper} >
             <Route path="book_shuttl" component={BookShuttl} />
+
+            <Route path="cc" component={CustomerCare} />
             <IndexRoute component={Appi}/>
             <Route path="unsubscribe" component={Unsubscribe} />
 
