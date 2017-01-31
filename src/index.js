@@ -49,7 +49,7 @@ const questionAnswer=[
         question:"My Office is located at/near ",
         options:[
             
-            ["MG Road","Sohna Road","Huda City Center","Cyber City","Golf Course Road","IFFCO Chowk","Udhyog Vihar","Hero Honda","Medanta-Sector 32"],
+            ["MG Road","Sohna Road","Huda City Center","Cyber City","Golf Course Road","IFFCO Chowk","Udhyog Vihar","Hero Honda","Medanta-Sector 32","Manesar"],
             ["Okhla","Jasola","Nehru Place","Bhikaji Cama","AIIMS","Saket"],
             ["Sector 62","Sector 15","Sector 16","Noida City Center"]
         ],
