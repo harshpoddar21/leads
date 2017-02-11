@@ -50,7 +50,7 @@ const questionAnswer=[
         options:[
             
             ["MG Road","Sohna Road","Huda City Center","Cyber City","Golf Course Road","IFFCO Chowk","Udhyog Vihar","Hero Honda","Medanta-Sector 32","Manesar"],
-            ["Okhla","Jasola","Nehru Place","Bhikaji Cama","AIIMS","Saket"],
+            ["Okhla","Jasola","Nehru Place","Bhikaji Cama","AIIMS","Saket","Lajpat Nagar"],
             ["Sector 62","Sector 15","Sector 16","Noida City Center"]
         ],
         depends:2
@@ -76,7 +76,7 @@ const questionAnswer=[
         options:[
 
             ["Huda City Center","Iffco Chowk","MG Road"],
-            ["Hauz Khas","Saket","AIIMS","Kalkaji","Greater Kailash","Govind Puri","Sarita Vihar","East Kailash"],
+            ["Hauz Khas","Saket","AIIMS","Kalkaji","Greater Kailash","Govind Puri","Sarita Vihar","East Kailash","Lajpat Nagar"],
             ["Noida City Center","Crossing Republic"],
             ["NIT 1-5","Sainik Colony","Ballabhgarh","Ajronda","Neharpar","Sector 31-37","Sector 21C,45","Greenfield"]
         ],
@@ -110,8 +110,10 @@ ReactDOM.render(
             <Route path="unsubscribe" component={Unsubscribe} />
 
             <Route path="welcomeNewRes" component={WelcomeNewRes} />
+
             <Route path="welcome" component={Welcome} />
         </Route>
+
     </Router>),
   document.getElementById('root')
 );
