@@ -176,7 +176,7 @@ class App extends Component {
         var fromCity = this.getAnswerToQuestionNo(4);
         var toStr = this.props.questionAnswers[2].options[toCity - 1][this.getAnswerToQuestionNo(3) - 1];
         var fromStr = this.props.questionAnswers[4].options[fromCity - 1][this.getAnswerToQuestionNo(5) - 1];
-        return "Travel from " + fromStr + " to " + toStr + " for just Rs 50 only. Shuttl runs every 10 mins.";
+        return "Travel from " + fromStr + " to " + toStr + " for just Rs 30 only. Shuttl runs every 10 mins.";
     }
 
     onInterested() {
